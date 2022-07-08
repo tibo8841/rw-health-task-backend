@@ -69,12 +69,11 @@ async function testServer(req, res) {
 }
 
 async function getUser(req, res) {
-  const { username, password } = await req.query;
+  const { email, password } = await req.query;
 
-  const result = await client.query(
-    `SELECT * FROM users JOIN user_customisation ON user_customisation.user_id = users.id WHERE username = $1`,
-    [username]
-  );
+  const result = await client.query(`SELECT * FROM users WHERE email = $1`, [
+    email,
+  ]);
   if (result.rows.length === 0) {
     res.json({ response: "User not found" });
   } else {
@@ -88,28 +87,22 @@ async function getUser(req, res) {
 }
 
 async function registerUser(req, res) {
-  const { username, password } = await req.body;
+  const { email, password } = await req.body;
 
-  const usernameCheck = await client.query(
-    `SELECT * FROM users WHERE username = $1`,
-    [username]
+  const emailCheck = await client.query(
+    `SELECT * FROM users WHERE email = $1`,
+    [email]
   );
-  if (usernameCheck.rows.length != 0) {
-    res.json({ response: "username already exists" });
+  if (emailCheck.rows.length != 0) {
+    res.json({ response: "email already exists" });
   } else {
     await client.query(
-      `INSERT INTO users (username,password,created_at) VALUES($1,$2,NOW())`,
-      [username, await hasher.hash(password)]
+      `INSERT INTO users (email,password,created_at) VALUES($1,$2,NOW())`,
+      [email, await hasher.hash(password)]
     );
-    const newUser = await client.query(
-      `SELECT * FROM users WHERE username = $1`,
-      [username]
-    );
-    await client.query(
-      `INSERT INTO user_customisation (user_id,win_message,profile_picture_id,has_crown) 
-    VALUES($1,'Not all dreamers are winners, but all winners are dreamers. Your dream is the key to your future',$2,FALSE)`,
-      [newUser.rows[0].id, Math.floor(Math.random() * 31) + 1]
-    );
+    const newUser = await client.query(`SELECT * FROM users WHERE email = $1`, [
+      email,
+    ]);
     res.json({ response: "added new user" });
   }
 }
@@ -119,7 +112,7 @@ async function getProfile(req, res) {
     const sessionID = req.cookies.sessionID;
     const user = await getUserFromID(sessionID);
     const profile = await client.query(
-      `SELECT user_id,win_message,profile_picture_id,has_crown,username FROM user_customisation JOIN users ON users.id = user_customisation.user_id WHERE user_customisation.user_id = $1`,
+      `SELECT user_id, email FROM users WHERE user_id = $1`,
       [user[0].id]
     );
     return res.json({ response: "user found", user: profile.rows[0] });
