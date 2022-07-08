@@ -10,13 +10,10 @@ const { response } = require("express");
 dotenv.config();
 let PORT = process.env.PORT || 8080;
 
+app.use(express.json());
+
 const corsSettings = {
-  origin: [
-    "http://localhost:3000",
-    "https://main--delicate-mooncake-1d4478.netlify.app/",
-  ],
-  credentials: false,
-  preflightContinue: false,
+  origin: true,
 };
 
 const connectionString =
@@ -26,8 +23,6 @@ const client = new Client(connectionString);
 client.connect();
 
 app.use(cors(corsSettings));
-
-app.use(express.json());
 
 app.use(express.urlencoded({ extended: true }));
 
