@@ -14,7 +14,6 @@ const corsSettings = {
   origin: [
     "http://localhost:3000",
     "https://main--delicate-mooncake-1d4478.netlify.app/",
-    "https://rw-health-task.vercel.app/",
   ],
   credentials: true,
 };
