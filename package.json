@@ -1,0 +1,29 @@
+{
+  "name": "rw-health-task-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tibo8841/rw-health-task-backend.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tibo8841/rw-health-task-backend/issues"
+  },
+  "homepage": "https://github.com/tibo8841/rw-health-task-backend#readme",
+  "dependencies": {
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "crypto": "^1.0.1",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "pbkdf2-password-hash": "^3.1.0",
+    "pg": "^8.7.3"
+  }
+}
