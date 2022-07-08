@@ -24,7 +24,7 @@ const connectionString =
 const client = new Client(connectionString);
 client.connect();
 
-app.use(cors());
+app.use(cors(corsSettings));
 
 app.use(express.json());
 
