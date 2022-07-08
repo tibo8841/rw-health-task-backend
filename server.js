@@ -15,7 +15,7 @@ const corsSettings = {
     "http://localhost:3000",
     "https://main--delicate-mooncake-1d4478.netlify.app/",
   ],
-  credentials: true,
+  credentials: false,
 };
 
 const connectionString =
