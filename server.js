@@ -16,6 +16,7 @@ const corsSettings = {
     "https://main--delicate-mooncake-1d4478.netlify.app/",
   ],
   credentials: false,
+  preflightContinue: false,
 };
 
 const connectionString =
@@ -25,8 +26,6 @@ const client = new Client(connectionString);
 client.connect();
 
 app.use(cors(corsSettings));
-
-app.options("*", cors());
 
 app.use(express.json());
 
