@@ -11,11 +11,7 @@ dotenv.config();
 let PORT = process.env.PORT || 8080;
 
 const corsSettings = {
-  origin: [
-    "http://localhost:3000",
-    "https://main--delicate-mooncake-1d4478.netlify.app/",
-  ],
-  credentials: true,
+  origin: "*",
 };
 
 const connectionString =
