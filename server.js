@@ -13,7 +13,7 @@ let PORT = process.env.PORT || 8080;
 const corsSettings = {
   origin: [
     "http://localhost:3000",
-    "https://brain-training-website.sigmalabs.co.uk",
+    "https://62c82f2274789f16c724ab32--delicate-mooncake-1d4478.netlify.app/",
   ],
   credentials: true,
 };
